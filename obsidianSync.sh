@@ -12,6 +12,7 @@ logPath="/Library/Logs/obsidianSync.log"
 
 logAction() {
     #Set up logging
+    sudo touch $logPath
 	logTime=$(date "+%Y-%m-%d - %H:%M:%S:")
 	echo "$logTime" "$1" >> $logPath
 }
