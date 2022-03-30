@@ -24,9 +24,9 @@ syncChanges() {
     git add .
 
     logAction "Writing fancy commit message..."
-    git commit -m "Automated Sync: $(date "+%Y-%m-%d - %H:%M:%S:")"
+    git commit -m "Automated Sync: $(date "+%Y-%m-%d - %H:%M:%S")"
 
-    logAction "Pusing...."
+    logAction "Pushing...."
     git push -u origin main
 
     logAction "Done!"
@@ -34,9 +34,9 @@ syncChanges() {
 
 checkChanges() {
     logAction "Checking For Changes in $vaultPath ..."
-    cd "$vaultPath"
-    changes="$(git status --porcelain | wc -l)"
-    if [ "changes" -eq 0 ]; then
+    cd ~/repos-personal/obsidian_data/
+    changes="$(git status --porcelain | wc -l | awk '{print $1}')"
+    if [[ "changes" -eq 0 ]]; then
         logAction "No Changes Found; Exiting..."
         exit 0
     else
