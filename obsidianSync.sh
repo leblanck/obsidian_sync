@@ -7,8 +7,9 @@
 ###############################
 
 #Set Up Variables
-vaultPath="~/repos-personal/obsidian_data/"
-logPath="~/obsidianSync/Logs/sync.log"
+loggedInUser=$(stat -f %Su /dev/console)
+vaultPath="/Users/$loggedInUser/repos-personal/obsidian_data/"
+logPath="/Users/$loggedInUser/obsidianSync/Logs/sync.log"
 
 logAction() {
     #Set up logging
@@ -34,7 +35,8 @@ syncChanges() {
 
 checkChanges() {
     logAction "Checking For Changes in $vaultPath ..."
-    cd ~/repos-personal/obsidian_data/
+    cd $vaultPath
+    git pull
     changes="$(git status --porcelain | wc -l | awk '{print $1}')"
     if [[ "changes" -eq 0 ]]; then
         logAction "No Changes Found; Exiting..."
