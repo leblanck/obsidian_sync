@@ -45,4 +45,5 @@ checkChanges() {
     fi
 }
 
+logAction "@@@@ START JOB @@@@"
 checkChanges

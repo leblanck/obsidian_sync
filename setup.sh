@@ -10,7 +10,8 @@ mkdir ~/.local
 mkdir ~/.local/bin
 mkdir ~/obsidianSync
 mkdir ~/obsidianSync/Logs
+touch ~/obsidianSync/Logs/sync.log
 
 cp ./obsidianSync.sh ~/.local/bin
 
-crontab -l | { cat; echo "*/30 * * * * ~/.local/bin/obsidianSync.sh >/dev/null 2>&1"; } | crontab -
+crontab -l | { cat; echo "*/30 * * * * ~/.local/bin/obsidianSync.sh >/tmp/stderr.log 2>/tmp/stdout.log"; } | crontab -
